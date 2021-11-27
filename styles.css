@@ -1,0 +1,16 @@
+.calContainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 80px;
+}
+
+.numContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 80px;
+}
+
+#display {
+    width: 80px;
+}
