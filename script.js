@@ -16,43 +16,63 @@ function divide(a,b) {
 
 function displayReset() {
     const display = document.getElementById('display');
-    const displayHistory = document.getElementById('displayHistory')
     display.removeChild;
     display.innerHTML = displayValue;
-    displayHistory.innerHTML = operationHistory;
+    let index = operationArray.indexOf('');
+    if (index !== -1) {
+        operationArray.splice(index,1);
+    }
 }
+
+function clearDisplay() {
+    if (displayValue !== '' && operationArray.length === 1) {
+        operationArray.splice(0,1);
+    }
+}
+
 let operationArray = [];
-let operator = '';
-let operationArrayResults = []
-let operationHistory = '';
 let displayValue = '';
 
 function calcResults() {
-
+    a = Number(operationArray[0]);
+    oper = operationArray[1];
+    b = Number(operationArray[2]);
+    if (oper === '*') {
+        return multiply(a,b);
+    } else if (oper === '/') {
+        return divide(a,b);
+    } else if (oper === '+') {
+        return add(a,b);
+    } else if (oper === '-') {
+        return subtract(a,b);
+    }
 }
 
 buttonCalc = document.getElementById('buttonCalc');
 function buttonCalcInput() {
-    operationHistory += displayValue;
+    operationArray.push(displayValue); 
+    if (operationArray.length === 3) {
+        displayValue = calcResults();
+        operationArray.splice(0, 3, displayValue);
+        displayReset();
+        displayValue = '';
+    }
     displayValue = '';
-    displayReset();
 }
 buttonCalc.addEventListener('click', buttonCalcInput);
 
 buttonOp = document.querySelectorAll('#buttonOp');
 function buttonOpInput() {
-    operationArray.push(displayValue);
-    if (operator === '+') {
-        num1 = operationArray[0];
-        num2 = operationArray[1];
-        results = add(num1,num2);
-        operationArrayResults.push(results);
-        operationArray = [];
+    clearDisplay();
+    operationArray.push(displayValue); 
+    operationArray.push(this.value);
+    if (operationArray.length === 4) {
+        displayValue = calcResults();
+        operationArray.splice(0, 3, displayValue);
+        displayReset();
+        displayValue = '';
     }
-    operationHistory += `${displayValue} ${this.value} `;
     displayValue = '';
-    operator = this.value;
-    displayReset();
 }
 for (i = 0; i < 4; i++) {
     buttonOp[i].addEventListener('click', buttonOpInput);
@@ -62,9 +82,10 @@ buttonNum = document.querySelectorAll("#buttonNum");
 function buttonNumInput() {
     if (this.value === '.' && displayValue.indexOf(".") > 0) {
         return '';
-    }
+    } 
     displayValue += this.value;
     displayReset();
+    
 }
 for (i = 0; i < 11; i++) {
     buttonNum[i].addEventListener('click', buttonNumInput);
@@ -72,7 +93,7 @@ for (i = 0; i < 11; i++) {
 
 allClear = document.getElementById('ac');
 function allClearInput() {
-    operationHistory = '';
+    operationArray = [];
     displayValue = '';
     displayReset();
 }
