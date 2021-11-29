@@ -1,5 +1,6 @@
 html, body {
     font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
 }
 
 button {
@@ -10,21 +11,66 @@ button {
     border-radius: 5px;
     border-style: outset;
     border-width: 1px;
-    background-color: rgb(224, 224, 224);
+    /* box-shadow: 0px 0px 1px #313131; */
+    background-color: rgb(211, 211, 211);
+    color: #000; /* Fallback for older browsers */
+    color: rgba(0, 0, 0, 0.6);
     padding: 4px 10px;
     margin: 1px;
+}
+
+button#ac, button#clear {
+    background-color: #df6f75;
+    border-color: #a75155;
+}
+
+button#ac:active, button#clear:active {
+    background-color: #c56065;
+}
+
+button#buttonOp {
+    background-color: #cfc957;
+    border-color: #858234;
+}
+
+button#buttonOp:focus {
+    background-color: #afac44;
+    border-style: inset;
+}
+
+#buttonOpfocus {
+    background-color: #afac44;
+    border-style: inset;
+}
+
+button#buttonCalc {
+    background-color: #74c94d;
+    border-color: #62a742;
+}
+
+button#buttonCalc:active {
+    background-color: #62aa41;
+}
+
+button#buttonNum {
+    background-color: #b9d9dd;
+    border-color: #869a9e;
+}
+
+button#buttonNum:active {
+    background-color: #9ab5b9;
 }
 
 button:active {
     background-color: rgb(180, 180, 180);
     border-style: inset;
-    border-width: 1px;
 }
 
 .calcContainer {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
+    height: 50%;
 }
 
 .calcBackground {
@@ -32,9 +78,12 @@ button:active {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    background-color: grey;
-    box-shadow: 1px 1px 1px #313131;
-    padding-bottom: 4px;
+    background-color: rgb(175, 175, 175);
+    border-style: outset;
+    border-width: 1px;
+    border-color: #888888;
+    box-shadow: 1px 1px 5px #616161;
+    padding-bottom: 5px;
     border-radius: 5px;
     width: 160px;
 }
@@ -48,22 +97,18 @@ button:active {
 }
 
 #display {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    align-items: center;
-    background-color: lightgray;
+    background-color: #aed4af;
+    color: #607760;
     border-radius: 5px;
     margin: 6px;
-    padding: 0 4px;
+    padding: 5px 4px;
     border-style: inset;
     border-width: 1px;
-    border-color: rgb(68, 68, 68);
-    width: 160px;
+    border-color: #84a185;
+    overflow-wrap: break-word;
+    text-align: right;
+    width: 136px;
     min-height: 28px;
-    font-size: 20px;
+    font-size: 24px;
 }
 
-#buttonOp:focus {
-    background-color: rgb(180, 180, 180);
-}

@@ -14,7 +14,7 @@ function divide(a,b) {
     return a / b;
 }
 
-function displayReset() {
+function displayReset() { 
     const display = document.getElementById('display');
     display.removeChild;
     display.innerHTML = displayValue;
@@ -24,7 +24,7 @@ function displayReset() {
     }
 }
 
-function clearDisplay() {
+function clearDisplay() { //removes extra '' left by empty displayValue after calc
     if (displayValue !== '' && operationArray.length === 1) {
         operationArray.splice(0,1);
     }
@@ -48,9 +48,17 @@ function calcResults() {
     }
 }
 
-buttonCalc = document.getElementById('buttonCalc');
-function buttonCalcInput() {
-    operationArray.push(displayValue); 
+function arrayCutOffOp() { //max length until calc is trigger
+    if (operationArray.length === 4) {
+        displayValue = calcResults();
+        operationArray.splice(0, 3, displayValue);
+        displayReset();
+        displayValue = '';
+    }
+    displayValue = '';
+}
+
+function arrayCutOffCalc() {
     if (operationArray.length === 3) {
         displayValue = calcResults();
         operationArray.splice(0, 3, displayValue);
@@ -59,6 +67,12 @@ function buttonCalcInput() {
     }
     displayValue = '';
 }
+
+buttonCalc = document.getElementById('buttonCalc');
+function buttonCalcInput() {
+    operationArray.push(displayValue); 
+    arrayCutOffCalc();
+}
 buttonCalc.addEventListener('click', buttonCalcInput);
 
 buttonOp = document.querySelectorAll('#buttonOp');
@@ -66,13 +80,7 @@ function buttonOpInput() {
     clearDisplay();
     operationArray.push(displayValue); 
     operationArray.push(this.value);
-    if (operationArray.length === 4) {
-        displayValue = calcResults();
-        operationArray.splice(0, 3, displayValue);
-        displayReset();
-        displayValue = '';
-    }
-    displayValue = '';
+    arrayCutOffOp();
 }
 for (i = 0; i < 4; i++) {
     buttonOp[i].addEventListener('click', buttonOpInput);
@@ -104,10 +112,29 @@ function clearButtonInput() {
     displayValue = displayValue.slice(0,-1);
     displayReset();
 }
-clearButton.addEventListener('click', clearButtonInput)
+clearButton.addEventListener('click', clearButtonInput);
 
-
-
-
-
-
+function numKey(e) {
+    if (e.key === '-' || e.key === "+" || e.key === "*" || e.key === "/") {
+        clearDisplay();
+        operationArray.push(displayValue); 
+        operationArray.push(e.key);
+        arrayCutOffOp();
+    } else if (e.code.slice(0, 5) === 'Digit' || e.code.length === 7 && e.code.slice(0,6) === 'Numpad') {
+        displayValue += e.code.slice(-1);
+        displayReset(); 
+    } else if (e.code === "Backspace") {
+        clearButtonInput();
+    } else if (e.code === "Enter" || e.code === "NumpadEnter" || e.code === "NumpadEqual") {
+        buttonCalcInput();
+    } else if (e.code === "Period" || e.code === "NumpadDecimal") {
+        if (e.code === "Period" && displayValue.indexOf(".") >= 0 || e.code === 'NumpadDecimal' && displayValue.indexOf(".") >= 0) {
+            return '';
+        }
+        displayValue += "."
+        displayReset(); 
+    } else if (e.code === 'Escape') {
+        allClearInput();
+    }
+}
+document.addEventListener('keydown', numKey);45
