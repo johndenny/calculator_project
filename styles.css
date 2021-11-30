@@ -3,6 +3,10 @@ html, body {
     height: 100%;
 }
 
+button:focus {
+    outline: none;
+}
+
 button {
     display: flex;
     justify-content: center;
@@ -11,7 +15,6 @@ button {
     border-radius: 5px;
     border-style: outset;
     border-width: 1px;
-    /* box-shadow: 0px 0px 1px #313131; */
     background-color: rgb(211, 211, 211);
     color: #000; /* Fallback for older browsers */
     color: rgba(0, 0, 0, 0.6);
@@ -30,15 +33,10 @@ button#ac:active, button#clear:active {
 
 button#buttonOp {
     background-color: #cfc957;
-    border-color: #858234;
+    border-color: #858234;  
 }
 
 button#buttonOp:focus {
-    background-color: #afac44;
-    border-style: inset;
-}
-
-#buttonOpfocus {
     background-color: #afac44;
     border-style: inset;
 }
@@ -62,7 +60,6 @@ button#buttonNum:active {
 }
 
 button:active {
-    background-color: rgb(180, 180, 180);
     border-style: inset;
 }
 
