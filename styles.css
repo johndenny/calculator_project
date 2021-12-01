@@ -31,6 +31,11 @@ button#ac:active, button#clear:active {
     background-color: #c56065;
 }
 
+button#clearActive, button#acActive {
+    background-color: #c56065;
+    border-style: inset;
+}
+
 button#buttonOp {
     background-color: #cfc957;
     border-color: #858234;  
@@ -50,6 +55,11 @@ button#buttonCalc:active {
     background-color: #62aa41;
 }
 
+button#buttonCalcActive {
+    background-color: #62aa41;
+    border-style: inset;
+}
+
 button#buttonNum {
     background-color: #b9d9dd;
     border-color: #869a9e;
@@ -57,6 +67,11 @@ button#buttonNum {
 
 button#buttonNum:active {
     background-color: #9ab5b9;
+}
+
+button#buttonNumActive {
+    background-color: #9ab5b9;
+    border-style: inset;
 }
 
 button:active {
@@ -82,14 +97,6 @@ button:active {
     box-shadow: 1px 1px 5px #616161;
     padding-bottom: 5px;
     border-radius: 5px;
-    width: 160px;
-}
-
-.numContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
     width: 160px;
 }
 
